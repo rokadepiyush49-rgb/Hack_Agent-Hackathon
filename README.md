@@ -102,5 +102,4 @@ public/
   focus-visible rings, ARIA wiring (via Radix where applicable), and
   `prefers-reduced-motion` handling.
 =======
-# Hack_Agent-Hackathon
->>>>>>> a033546ded423111ec9aa9fa7389e8db867cb28c
+
