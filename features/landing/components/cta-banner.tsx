@@ -16,12 +16,16 @@ export function CtaBanner() {
         <div className="relative z-10 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button size="lg" asChild>
             <Link href="/meeting/new">
-              Start your pitch
-              <ArrowRight />
+              <span className="inline-flex items-center gap-2">
+                Start your pitch
+                <ArrowRight />
+              </span>
             </Link>
           </Button>
           <Button size="lg" variant="secondary" asChild>
-            <Link href="/pricing">See pricing</Link>
+            <Link href="/pricing">
+              <span>See pricing</span>
+            </Link>
           </Button>
         </div>
       </div>

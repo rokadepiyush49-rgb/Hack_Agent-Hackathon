@@ -20,8 +20,10 @@ export function ExecutivesShowcase() {
           action={
             <Button variant="outline" asChild>
               <Link href="/executives">
-                Meet the full board
-                <ArrowRight />
+                <span className="inline-flex items-center gap-2">
+                  Meet the full board
+                  <ArrowRight />
+                </span>
               </Link>
             </Button>
           }

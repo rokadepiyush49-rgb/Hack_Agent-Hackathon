@@ -60,20 +60,22 @@ export function Sidebar({ badgeCounts, collapsed = false, onToggleCollapsed, cla
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
+                    "flex rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
                     collapsed && "justify-center px-0",
                     isActive
                       ? "bg-primary/12 text-primary"
                       : "text-muted-foreground hover:bg-surface-elevated hover:text-foreground",
                   )}
                 >
-                  <Icon className="size-4 shrink-0" />
-                  {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
-                  {!collapsed && Boolean(badgeCount) && (
-                    <span className="rounded-full bg-primary/15 px-1.5 py-0.5 text-[0.65rem] font-semibold text-primary">
-                      {badgeCount}
-                    </span>
-                  )}
+                  <span className={cn("flex items-center gap-3", collapsed && "justify-center")}>
+                    <Icon className="size-4 shrink-0" />
+                    {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
+                    {!collapsed && Boolean(badgeCount) && (
+                      <span className="rounded-full bg-primary/15 px-1.5 py-0.5 text-[0.65rem] font-semibold text-primary">
+                        {badgeCount}
+                      </span>
+                    )}
+                  </span>
                 </Link>
               );
             })}
@@ -92,13 +94,15 @@ export function Sidebar({ badgeCounts, collapsed = false, onToggleCollapsed, cla
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
+                "flex rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
                 collapsed && "justify-center px-0",
                 isActive ? "bg-primary/12 text-primary" : "text-muted-foreground hover:bg-surface-elevated hover:text-foreground",
               )}
             >
-              <Icon className="size-4 shrink-0" />
-              {!collapsed && <span>{item.label}</span>}
+              <span className={cn("flex items-center gap-3", collapsed && "justify-center")}>
+                <Icon className="size-4 shrink-0" />
+                {!collapsed && <span>{item.label}</span>}
+              </span>
             </Link>
           );
         })}

@@ -43,14 +43,18 @@ export function Hero() {
           <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button size="lg" asChild>
               <Link href="/meeting/new">
-                Start your pitch
-                <ArrowRight />
+                <span className="inline-flex items-center gap-2">
+                  Start your pitch
+                  <ArrowRight />
+                </span>
               </Link>
             </Button>
             <Button size="lg" variant="secondary" asChild>
               <Link href="/reports">
-                <PlayCircle />
-                See a sample report
+                <span className="inline-flex items-center gap-2">
+                  <PlayCircle />
+                  See a sample report
+                </span>
               </Link>
             </Button>
           </motion.div>

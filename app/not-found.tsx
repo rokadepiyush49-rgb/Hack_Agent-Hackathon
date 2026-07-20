@@ -17,8 +17,10 @@ export default function NotFound() {
       </div>
       <Button asChild>
         <Link href="/dashboard">
-          <ArrowLeft className="size-4" />
-          Back to dashboard
+          <span className="inline-flex items-center gap-2">
+            <ArrowLeft className="size-4" />
+            Back to dashboard
+          </span>
         </Link>
       </Button>
     </div>

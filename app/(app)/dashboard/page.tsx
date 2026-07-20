@@ -20,7 +20,9 @@ export default function DashboardPage() {
         description="Two board sessions are active. Here's where every pitch in motion stands."
         action={
           <Button asChild>
-            <Link href="/meeting/new">New meeting</Link>
+            <Link href="/meeting/new">
+              <span>New meeting</span>
+            </Link>
           </Button>
         }
       />
