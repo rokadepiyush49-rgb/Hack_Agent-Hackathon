@@ -33,10 +33,12 @@ export function Footer() {
       <div className="container grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <Link href="/" className="flex items-center gap-2">
-            <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Gavel className="size-4" />
+            <span className="flex items-center gap-2">
+              <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <Gavel className="size-4" />
+              </span>
+              <span className="font-display text-lg font-medium tracking-tight">BoardroomAI</span>
             </span>
-            <span className="font-display text-lg font-medium tracking-tight">BoardroomAI</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
             A virtual board of AI executives that pressure-tests your startup before a real one does.
@@ -50,7 +52,7 @@ export function Footer() {
               {column.links.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-foreground/80 hover:text-primary">
-                    {link.label}
+                    <span>{link.label}</span>
                   </Link>
                 </li>
               ))}

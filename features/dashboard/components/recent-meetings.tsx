@@ -25,8 +25,10 @@ export function RecentMeetings() {
         <CardTitle className="text-base">Recent meetings</CardTitle>
         <Button variant="ghost" size="sm" asChild>
           <Link href="/boardroom">
-            View all
-            <ArrowRight />
+            <span className="inline-flex items-center gap-2">
+              View all
+              <ArrowRight />
+            </span>
           </Link>
         </Button>
       </CardHeader>
@@ -35,20 +37,22 @@ export function RecentMeetings() {
           <Link
             key={meeting.id}
             href={meeting.status === "completed" ? `/reports/${meeting.id}` : "/boardroom"}
-            className="flex items-center justify-between gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-surface-elevated"
+            className="block rounded-lg px-3 py-3 transition-colors hover:bg-surface-elevated"
           >
-            <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{meeting.startupName}</p>
-              <p className="truncate text-xs text-muted-foreground">{meeting.oneLiner}</p>
-            </div>
-            <div className="flex shrink-0 items-center gap-3">
-              {meeting.investmentScore !== undefined && (
-                <span className="font-mono text-sm font-medium text-foreground">{meeting.investmentScore}</span>
-              )}
-              <Badge tone={statusTone[meeting.status]} pulse={meeting.status === "in-progress"}>
-                {statusLabel[meeting.status]}
-              </Badge>
-              <span className="hidden text-xs text-muted-foreground sm:block">{meeting.updatedAt}</span>
+            <div className="flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-medium text-foreground">{meeting.startupName}</p>
+                <p className="truncate text-xs text-muted-foreground">{meeting.oneLiner}</p>
+              </div>
+              <div className="flex shrink-0 items-center gap-3">
+                {meeting.investmentScore !== undefined && (
+                  <span className="font-mono text-sm font-medium text-foreground">{meeting.investmentScore}</span>
+                )}
+                <Badge tone={statusTone[meeting.status]} pulse={meeting.status === "in-progress"}>
+                  {statusLabel[meeting.status]}
+                </Badge>
+                <span className="hidden text-xs text-muted-foreground sm:block">{meeting.updatedAt}</span>
+              </div>
             </div>
           </Link>
         ))}

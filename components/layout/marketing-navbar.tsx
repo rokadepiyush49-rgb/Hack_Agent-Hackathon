@@ -25,10 +25,12 @@ export function MarketingNavbar({ className }: { className?: string }) {
     <header className={cn("glass sticky top-0 z-40 border-b border-border/60", className)}>
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Gavel className="size-4" />
+          <span className="flex items-center gap-2">
+            <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <Gavel className="size-4" />
+            </span>
+            <span className="font-display text-lg font-medium tracking-tight">BoardroomAI</span>
           </span>
-          <span className="font-display text-lg font-medium tracking-tight">BoardroomAI</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -45,10 +47,14 @@ export function MarketingNavbar({ className }: { className?: string }) {
 
         <div className="hidden items-center gap-2 md:flex">
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/dashboard">Sign in</Link>
+            <Link href="/dashboard">
+              <span>Sign in</span>
+            </Link>
           </Button>
           <Button size="sm" asChild>
-            <Link href="/meeting/new">Start free</Link>
+            <Link href="/meeting/new">
+              <span>Start free</span>
+            </Link>
           </Button>
         </div>
 
@@ -78,10 +84,14 @@ export function MarketingNavbar({ className }: { className?: string }) {
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-border/60 pt-3">
               <Button variant="secondary" size="sm" asChild>
-                <Link href="/dashboard">Sign in</Link>
+                <Link href="/dashboard">
+                  <span>Sign in</span>
+                </Link>
               </Button>
               <Button size="sm" asChild>
-                <Link href="/meeting/new">Start free</Link>
+                <Link href="/meeting/new">
+                  <span>Start free</span>
+                </Link>
               </Button>
             </div>
           </div>

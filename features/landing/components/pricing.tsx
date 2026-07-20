@@ -58,7 +58,9 @@ export function Pricing() {
               </ul>
 
               <Button variant={tier.highlighted ? "primary" : "secondary"} asChild>
-                <Link href="/meeting/new">{tier.ctaLabel}</Link>
+                <Link href="/meeting/new">
+                  <span>{tier.ctaLabel}</span>
+                </Link>
               </Button>
             </Card>
           </motion.div>
