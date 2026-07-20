@@ -1,4 +1,4 @@
-import type { Transition, Variants } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 /**
  * Central motion tokens. Every animated component should reach for these
@@ -6,8 +6,8 @@ import type { Transition, Variants } from "framer-motion";
  * "everything animates slightly differently" tell of generated UI.
  */
 
-export const EMPHASIZED_EASE: Transition["ease"] = [0.16, 1, 0.3, 1];
-export const STANDARD_EASE: Transition["ease"] = [0.4, 0, 0.2, 1];
+export const EMPHASIZED_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+export const STANDARD_EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
 export const DURATION = {
   fast: 0.15,
@@ -67,7 +67,8 @@ export function withReducedMotion(variants: Variants, reduced: boolean): Variant
   const stripped: Variants = {};
   for (const key of Object.keys(variants)) {
     const entry = variants[key];
-    stripped[key] = typeof entry === "object" ? { opacity: (entry as { opacity?: number }).opacity } : entry;
+    if (entry === undefined) continue;
+    stripped[key] = typeof entry === "object" ? { opacity: (entry as { opacity?: number }).opacity ?? 1 } : entry;
   }
   return stripped;
 }

@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# BoardroomAI — Frontend
+# BoardroomAI
 
 An AI-powered virtual board of directors. Founders pitch; a panel of AI
 executives (CEO, CTO, CFO, CMO, VC, Legal, Research, Growth agents) debates
@@ -101,5 +100,23 @@ public/
 - **Accessibility is not optional** — every interactive primitive ships
   focus-visible rings, ARIA wiring (via Radix where applicable), and
   `prefers-reduced-motion` handling.
-=======
 
+
+## Full-stack integration
+
+This repo now contains the whole product, merged from the three team repos:
+
+| Layer | Source repo | Where it lives now |
+|---|---|---|
+| Frontend (UI, all routes) | rokadepiyush49-rgb/Hack_Agent-Hackathon | `app/`, `components/`, `features/` |
+| Backend (Supabase auth + DB) | GitBeat16/boardroom | `lib/supabase/`, `app/auth|login|signup/`, `middleware.ts`, `supabase/*.sql` |
+| AI pipeline (Gemini agents) | KD4R/boardroom-ai-pipeline | `src/` (agents, prompts, service, validator), `app/api/*` |
+
+### Setup
+
+1. `cp .env.example .env.local` and fill in Supabase keys + `GEMINI_API_KEY`.
+2. Run the SQL in `supabase/schema_v2.sql` on your Supabase project.
+3. `npm install && npm run dev`.
+
+Auth: `/login`, `/signup` (Supabase). `/dashboard`, `/boardroom`, `/reports` require sign-in (see `middleware.ts`).
+Real API: `/api/analyze` (AI board analysis), `/api/meetings/*`, `/api/pitches/*`. The remaining `/api/*` routes still serve mock data — see `docs/BACKEND-API.md`.

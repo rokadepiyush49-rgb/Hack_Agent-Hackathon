@@ -17,7 +17,7 @@ export function MarketSizeChart() {
         <Legend layout="vertical" align="right" verticalAlign="middle" wrapperStyle={{ fontSize: 12, color: "hsl(var(--muted-foreground))" }} />
         <Tooltip
           contentStyle={{ background: "hsl(var(--surface-overlay))", border: "1px solid hsl(var(--border-strong))", borderRadius: 10, fontSize: 12 }}
-          formatter={(value: number) => [`$${value}M`, ""]}
+          formatter={(value) => [`$${Number(value)}M`, ""]}
         />
       </PieChart>
     </ChartWrapper>

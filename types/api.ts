@@ -1,5 +1,5 @@
 /**
- * API contracts. Route handlers (`app/api/**/route.ts`) build responses
+ * API contracts. Route handlers (`app/api/.../route.ts`) build responses
  * shaped like these; feature `service.ts` files (client side) parse
  * responses typed as these. Keep this file the single source of truth —
  * if a field changes here, both sides feel it via a type error, not a
