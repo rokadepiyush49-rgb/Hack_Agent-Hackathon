@@ -3,8 +3,19 @@ import { SeatingGrid } from "@/features/boardroom/components/seating-grid";
 import { TranscriptFeed } from "@/features/boardroom/components/transcript-feed";
 import { ConsensusPanel } from "@/features/boardroom/components/consensus-panel";
 import { PitchHistory } from "@/features/boardroom/components/pitch-history";
+import { LiveBoardroom } from "@/features/boardroom/components/live-boardroom";
 
-export default function BoardroomPage() {
+export default async function BoardroomPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ meeting?: string }>;
+}) {
+  const { meeting } = await searchParams;
+
+  // Arriving from a real pitch submission → live session backed by Supabase + Gemini.
+  if (meeting) return <LiveBoardroom meetingId={meeting} />;
+
+  // No meeting id → demo walkthrough on mock data.
   return (
     <div>
       <div className="mb-3">

@@ -20,6 +20,8 @@ export function PitchForm() {
   const [selectedExecs, setSelectedExecs] = useState<string[]>(executiveRoster.map((e) => e.id));
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -32,10 +34,62 @@ export function PitchForm() {
     setSelectedExecs((prev) => (prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]));
   }
 
-  function onSubmit() {
+  async function onSubmit(values: PitchFormValues) {
     setIsSubmitting(true);
-    // No backend yet — simulate the board convening, then hand off to the live session.
-    setTimeout(() => router.push("/boardroom"), 900);
+    setSubmitError(null);
+
+    const industryLabel =
+      industryOptions.find((o) => o.value === values.industry)?.label ?? values.industry;
+    const stageLabel =
+      stageOptions.find((o) => o.value === values.stage)?.label ?? values.stage;
+
+    try {
+      // 1. Persist the pitch.
+      const pitchRes = await fetch("/api/pitches", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          startup_name: values.startupName,
+          problem_statement: values.pitch,
+          solution: values.oneLiner,
+          target_audience: industryLabel,
+          business_model: stageLabel,
+          revenue_model: stageLabel,
+        }),
+      });
+      if (!pitchRes.ok) throw new Error((await pitchRes.json()).error ?? "Failed to save pitch");
+      const { pitch } = (await pitchRes.json()) as { pitch: { id: string } };
+
+      // 2. Open a board meeting for it.
+      const meetingRes = await fetch("/api/meetings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pitch_id: pitch.id }),
+      });
+      if (!meetingRes.ok) throw new Error((await meetingRes.json()).error ?? "Failed to start meeting");
+      const { meeting } = (await meetingRes.json()) as { meeting: { id: string } };
+
+      // 3. Kick off the AI board debate — deliberately NOT awaited. Gemini takes
+      //    a while; the boardroom page polls the meeting and streams results in.
+      void fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          meeting_id: meeting.id,
+          startupName: values.startupName,
+          industry: industryLabel,
+          problem: values.pitch,
+          solution: values.oneLiner,
+          targetMarket: industryLabel,
+          businessModel: stageLabel,
+        }),
+      });
+
+      router.push(`/boardroom?meeting=${meeting.id}`);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong");
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -140,6 +194,12 @@ export function PitchForm() {
           )}
           {isSubmitting && "Convening the board…"}
         </Button>
+
+        {submitError && (
+          <p className="text-sm text-destructive" role="alert">
+            {submitError}
+          </p>
+        )}
       </div>
     </form>
   );
